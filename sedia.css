@@ -1,0 +1,351 @@
+/* --- CSS 變數定義 (亮色/深色模式配色) --- */
+:root {
+  /* 預設亮色模式 (Light Mode) */
+  --bg-body: #f0f0f0;
+  --bg-container: #ffffff;
+  --bg-controls: #e0e0e0;
+  --text-main: #000000;
+  --text-secondary: #333333;
+  --text-placeholder: #666666;
+  --border-color: #cccccc;
+
+  /* 表格相關 */
+  --table-border: #ffffff; /* 表格框線 */
+  --header-bg: #8fa8fc; /* 標題背景 (藍紫色) */
+  --header-text: #000000;
+  --row-bg: #f2f2f2; /* 內容背景 (淺灰色) */
+  --row-hover: #e0e0e0; /* 滑鼠滑過的顏色 (變深一點) */
+
+  /* 按鈕與特殊色 */
+  --btn-bg: #8fa8fc;
+  --btn-text: #000000;
+  --btn-hover: #7690e3;
+  --btn-disabled: #cccccc;
+  --highlight-red: red;
+}
+
+/* 深色模式 (Dark Mode) */
+[data-theme="dark"] {
+  --bg-body: #121212;
+  --bg-container: #1e1e1e;
+  --bg-controls: #2d2d2d;
+  --text-main: #e0e0e0;
+  --text-secondary: #cccccc;
+  --text-placeholder: #aaaaaa;
+  --border-color: #444444;
+
+  /* 表格相關 (深色) */
+  --table-border: #333333;
+  --header-bg: #3f51b5; /* 深一點的藍色 */
+  --header-text: #ffffff;
+  --row-bg: #1e1e1e; /* 深色背景 */
+  --row-hover: #2c2c2c;
+
+  /* 按鈕與特殊色 */
+  --btn-bg: #5c6bc0;
+  --btn-text: #ffffff;
+  --btn-hover: #7986cb;
+  --btn-disabled: #555555;
+  --highlight-red: #ff6b6b; /* 淺紅色，深底比較清楚 */
+}
+
+/* --- 1. 基礎設定 --- */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  transition:
+    background-color 0.3s,
+    color 0.3s; /* 平滑切換效果 */
+}
+
+.container {
+  max-width: 1200px; /* 修改：寬度加大 */
+  margin: 0 auto;
+  background: var(--bg-container);
+  padding: 30px; /* 修改：內距加大 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  min-height: 600px;
+  position: relative; /* 為了定位深色模式按鈕 */
+  border-radius: 8px;
+  transition: background-color 0.3s;
+
+  /* 修改：使用 Flexbox 讓內容垂直排列，確保 footer 在底部 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 深色模式切換按鈕 */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s;
+}
+.theme-toggle:hover {
+  background-color: var(--bg-controls);
+}
+
+h2 {
+  text-align: center;
+  color: var(--text-main);
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 32px; /* 修改：標題變大 */
+}
+
+/* --- 2. 篩選器與工具列 --- */
+.controls-section {
+  margin-bottom: 20px;
+  padding: 25px; /* 修改：高度增加 */
+  background-color: var(--bg-controls);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  justify-content: center;
+  color: var(--text-main);
+  font-size: 18px; /* 修改：搜尋文字變大 */
+}
+
+.search-box input {
+  padding: 12px; /* 修改：輸入框變大 */
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-container);
+  color: var(--text-main);
+  border-radius: 4px;
+  font-size: 18px; /* 修改：輸入文字變大 */
+  width: 100%;
+  max-width: 400px; /* 修改：搜尋框寬度增加 */
+}
+
+/* --- 分頁控制按鈕 (固定在底部) --- */
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 水平置中 */
+  gap: 20px; /* 修改：按鈕間距增加 */
+  padding: 30px 0 10px 0; /* 修改：下方留白調整 */
+  margin-top: auto; /* 關鍵：這會把區塊推到容器的最底部 */
+  /* border-top: 1px solid var(--border-color); 已移除 */
+  width: 100%;
+}
+
+.btn {
+  padding: 10px 24px; /* 修改：按鈕尺寸變大 */
+  border: none;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px; /* 修改：按鈕文字變大 */
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background-color: var(--btn-hover);
+}
+
+.btn:disabled {
+  background-color: var(--btn-disabled);
+  cursor: not-allowed;
+  color: var(--text-placeholder);
+}
+
+.current-month-display {
+  font-size: 20px; /* 修改：月份顯示變大 */
+  font-weight: bold;
+  color: var(--text-secondary);
+  min-width: 100px;
+  text-align: center;
+}
+
+/* --- 3. 表格核心樣式 --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid var(--table-border);
+}
+
+th,
+td {
+  padding: 18px 24px; /* 修改：表格內距變大，更寬敞 */
+  text-align: left;
+  border: 2px solid var(--table-border);
+  font-size: 18px; /* 修改：表格內容文字變大 */
+}
+
+/* 深色模式切換按鈕 */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s;
+}
+.theme-toggle:hover {
+  background-color: var(--bg-controls);
+}
+
+h2 {
+  text-align: center;
+  color: var(--text-main);
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+/* --- 2. 篩選器與工具列 --- */
+.controls-section {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: var(--bg-controls);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+  color: var(--text-main);
+}
+
+.search-box input {
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-container);
+  color: var(--text-main);
+  border-radius: 4px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 300px;
+}
+
+/* --- 分頁控制按鈕 (固定在底部) --- */
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 水平置中 */
+  gap: 15px;
+  padding: 20px 0 0 0; /* 上方留白 */
+  margin-top: auto; /* 關鍵：這會把區塊推到容器的最底部 */
+  /* border-top: 1px solid var(--border-color); 已移除 */
+  width: 100%;
+}
+
+.btn {
+  padding: 6px 15px;
+  border: none;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background-color: var(--btn-hover);
+}
+
+.btn:disabled {
+  background-color: var(--btn-disabled);
+  cursor: not-allowed;
+  color: var(--text-placeholder);
+}
+
+.current-month-display {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-secondary);
+  min-width: 80px;
+  text-align: center;
+}
+
+/* --- 3. 表格核心樣式 --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid var(--table-border);
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 2px solid var(--table-border);
+}
+
+/* 標題列 */
+thead tr {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 內容列：淺灰色背景 */
+tbody tr {
+  background-color: var(--row-bg);
+  transition: background-color 0.3s;
+}
+
+/* 滑鼠滑過效果 */
+tbody tr:hover {
+  background-color: var(--row-hover);
+}
+
+/* --- 4. 特殊文字樣式 --- */
+.highlight-red {
+  color: var(--highlight-red);
+  font-weight: bold;
+}
+
+/* --- 5. 狀態提示 --- */
+.status-message {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-placeholder);
+  font-style: italic;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+  /* 讓表格區塊佔據中間剩餘空間，確保 footer 被推到底部 */
+  flex-grow: 1;
+}

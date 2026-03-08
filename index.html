@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>軟創一行事曆</title>
+    <link rel="stylesheet" href="sedia.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- 深色模式切換按鈕 -->
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+        🌙 深色模式
+      </button>
+
+      <h2>🗓️ 軟創一行事曆</h2>
+
+      <!-- 上方：搜尋 (置中) -->
+      <div class="controls-section">
+        <div class="search-box">
+          <label for="searchInput">🔍 搜尋：</label>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="搜尋關鍵字 (日期/課程名稱)..."
+          />
+        </div>
+      </div>
+
+      <!-- 表格區塊 -->
+      <div class="table-wrapper">
+        <table id="scheduleTable">
+          <thead>
+            <tr>
+              <th style="width: 25%">日期</th>
+              <th style="width: 25%">課程名稱</th>
+              <th style="width: 25%">事項</th>
+              <th style="width: 25%">備註</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- JavaScript 自動產生內容 -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 下方：月份切換 (置中，固定底部) -->
+      <div class="pagination-controls" id="paginationControls">
+        <button class="btn" id="prevBtn" onclick="changeMonth(-1)">
+          ◀ 上個月
+        </button>
+        <span class="current-month-display" id="monthDisplay">Loading...</span>
+        <button class="btn" id="nextBtn" onclick="changeMonth(1)">
+          下個月 ▶
+        </button>
+      </div>
+    </div>
+
+    <script src="sedia.js"></script>
+  </body>
+</html>
